@@ -1,0 +1,258 @@
+{
+	"info": {
+		"_postman_id": "62315aa6-4e71-4f16-bd91-d47832fcd3f1",
+		"name": "job_api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22277285"
+	},
+	"item": [
+		{
+			"name": "Register User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json()\r",
+							"pm.globals.set(\"accessToken\", jsonData.token)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Yasir\",\r\n    \"email\":\"Yasirkhan@gmail.com\",\r\n    \"password\":\"monkey\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/auth/register",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Jobs",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmRjMmIyZGNkNDEyOTQ2ZjRjNTc1YjYiLCJuYW1lIjoiQWhtYWQiLCJpYXQiOjE2NTg1OTYxNDIsImV4cCI6MTY2MTE4ODE0Mn0.lGHO6Fbv-Fsf0hijprYI7X-ydoat9pS9ZNumDcYib_4",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{URL}}/jobs/",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"jobs",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json()\r",
+							"pm.globals.set(\"accessToken\", jsonData.token)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"HarisBukhari@gmail.com\",\r\n    \"password\":\"monkey\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/auth/login",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Job",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmRjMmIyZGNkNDEyOTQ2ZjRjNTc1YjYiLCJuYW1lIjoiQWhtYWQiLCJpYXQiOjE2NTg1OTYxNDIsImV4cCI6MTY2MTE4ODE0Mn0.lGHO6Fbv-Fsf0hijprYI7X-ydoat9pS9ZNumDcYib_4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"company\":\"Mezaan Bank\",\r\n    \"position\":\"WebDev\",\r\n    \"status\":\"pending\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/jobs",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"jobs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Job",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/jobs/62dd4c2f9183044b14a7468c",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"jobs",
+						"62dd4c2f9183044b14a7468c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Job",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"company\":\"Bank Al Habib\",\r\n    \"position\":\"WebDev\",\r\n    \"status\":\"interview\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/jobs/62dd4c2f9183044b14a7468c",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"jobs",
+						"62dd4c2f9183044b14a7468c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Job",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/jobs/62dc26e700b06004089946d7",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"jobs",
+						"62dc26e700b06004089946d7"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

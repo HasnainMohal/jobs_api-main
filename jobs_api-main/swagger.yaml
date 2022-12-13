@@ -1,0 +1,233 @@
+openapi: 3.0.0
+info:
+  title: Jobs Api
+  contact: {}
+  version: '1.0'
+servers:
+- url: https://jobs-api-node.herokuapp.com/api/v1
+  variables: {}
+paths:
+  /auth/register:
+    post:
+      tags:
+      - Auth
+      summary: Register User
+      operationId: RegisterUser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterUserRequest'
+            example:
+              name: Yasir
+              email: Yasirkhan@gmail.com
+              password: monkey
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/login:
+    post:
+      tags:
+      - Auth
+      summary: Login
+      operationId: Login
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+            example:
+              email: HarisBukhari@gmail.com
+              password: monkey
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /jobs:
+    get:
+      tags:
+      - Jobs
+      summary: Get All Jobs
+      operationId: GetAllJobs
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    post:
+      tags:
+      - Jobs
+      summary: Create Job
+      operationId: CreateJob
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateJobRequest'
+            example:
+              company: Mezaan Bank
+              position: WebDev
+              status: pending
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /jobs/{id}:
+    parameters:
+    - in: path
+      name: id
+      schema:
+        type: string
+      required: true
+      description: the job id
+    get:
+      tags:
+      - Jobs
+      summary: Job
+      operationId: Job
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    patch:
+      tags:
+      - Jobs
+      summary: Update Job
+      operationId: UpdateJob
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateJobRequest'
+            example:
+              company: Bank Al Habib
+              position: WebDev
+              status: interview
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+
+    delete:
+      tags:
+      - Jobs
+      summary: Delete Job
+      operationId: DeleteJob
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+components:
+  schemas:
+    RegisterUserRequest:
+      title: RegisterUserRequest
+      required:
+      - name
+      - email
+      - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        name: Yasir
+        email: Yasirkhan@gmail.com
+        password: monkey
+    LoginRequest:
+      title: LoginRequest
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: HarisBukhari@gmail.com
+        password: monkey
+    CreateJobRequest:
+      title: CreateJobRequest
+      required:
+      - company
+      - position
+      - status
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+        status:
+          type: string
+      example:
+        company: Mezaan Bank
+        position: WebDev
+        status: pending
+    UpdateJobRequest:
+      title: UpdateJobRequest
+      required:
+      - company
+      - position
+      - status
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+        status:
+          type: string
+      example:
+        company: Bank Al Habib
+        position: WebDev
+        status: interview
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security: []
+tags:
+- name: Auth
+  description: ''
+- name: Jobs
+  description: ''
